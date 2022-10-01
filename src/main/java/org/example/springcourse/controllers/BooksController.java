@@ -31,7 +31,7 @@ public class BooksController {
                         @RequestParam(value = "sort_by_year", required = false) boolean sortByYear) {
 
         if (page == null || booksPerPage == null)
-            model.addAttribute("books", booksService.findAll(sortByYear)); // выдача всех книг
+            model.addAttribute("books", booksService.findAll(sortByYear));
         else
             model.addAttribute("books", booksService.findWithPagination(page, booksPerPage, sortByYear));
 
@@ -97,7 +97,6 @@ public class BooksController {
 
     @PatchMapping("/{id}/assign")
     public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson) {
-        // У selectedPerson назначено только поле id, остальные поля - null
         booksService.assign(id, selectedPerson);
         return "redirect:/books/" + id;
     }
